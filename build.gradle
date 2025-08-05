@@ -1,0 +1,60 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group = 'mocksuite'
+version = '0.1.0-SNAPSHOT'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+application {
+    mainClass = 'mocksuite.Main'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+    // Testing dependencies
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testImplementation 'org.mockito:mockito-core:5.8.0'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test:3.2.0'
+}
+
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'mocksuite.Main',
+                'Implementation-Title': 'MockSuite',
+                'Implementation-Version': project.version,
+        )
+    }
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory()? it : zipTree(it) }
+    }
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
+test {
+    useJUnitPlatform()
+    testLogging {
+        events "passed", "skipped", "failed"
+        exceptionFormat "full"
+    }
+    maxHeapSize = "1g"
+    timeout = Duration.ofMinutes(15)
+
+    systemProperty 'junit.jupiter.execution.parallel.enabled', 'true'
+    systemProperty 'junit.jupiter.execution.timeout.default', '15s'
+    systemProperty 'junit.jupiter.execution.timeout.testable.method.default', '2m'
+}

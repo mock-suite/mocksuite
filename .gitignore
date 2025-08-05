@@ -1,0 +1,29 @@
+# Gradle
+.gradle/
+/build/
+.gradle-template/
+!gradle-wrapper.jar
+!gradle-wrapper.properties
+.project
+.settings/
+.classpath
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Eclipse
+.metadata/
+.apt_generated/
+.factorypath
+.springBeans
+.sts4-cache
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
