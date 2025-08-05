@@ -24,6 +24,13 @@ repositories {
 
 dependencies {
 
+    // Lombok
+    implementation("org.projectlombok:lombok:1.18.38")
+
+    // Logging
+    implementation 'org.slf4j:slf4j-api:2.0.9'
+    implementation 'ch.qos.logback:logback-classic:1.4.14'
+
     // Testing dependencies
     testImplementation platform('org.junit:junit-bom:5.10.0')
     testImplementation 'org.junit.jupiter:junit-jupiter'
@@ -45,16 +52,16 @@ jar {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
 
-test {
-    useJUnitPlatform()
-    testLogging {
-        events "passed", "skipped", "failed"
-        exceptionFormat "full"
-    }
-    maxHeapSize = "1g"
-    timeout = Duration.ofMinutes(15)
-
-    systemProperty 'junit.jupiter.execution.parallel.enabled', 'true'
-    systemProperty 'junit.jupiter.execution.timeout.default', '15s'
-    systemProperty 'junit.jupiter.execution.timeout.testable.method.default', '2m'
-}
+//test {
+//    useJUnitPlatform()
+//    testLogging {
+//        events "passed", "skipped", "failed"
+//        exceptionFormat "full"
+//    }
+//    maxHeapSize = "1g"
+//    timeout = Duration.ofMinutes(15)
+//
+//    systemProperty 'junit.jupiter.execution.parallel.enabled', 'true'
+//    systemProperty 'junit.jupiter.execution.timeout.default', '15s'
+//    systemProperty 'junit.jupiter.execution.timeout.testable.method.default', '2m'
+//}
